@@ -1,0 +1,39 @@
+<!DOCTYPE html> <!-- HTML5 문서 유형 선언 -->
+<html> <!-- HTML 문서 시작 -->
+    <head> <!-- 문서의 메타데이터를 포함하는 요소 -->
+        <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 설정 -->
+        <title>React CDN Sample</title> <!-- 문서의 제목을 설정 -->
+    </head>
+    <body> <!-- 문서의 본문을 포함하는 요소 -->
+        <div id="root"></div> <!-- React 컴포넌트를 렌더링할 DOM 요소 -->
+        <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script> <!-- React 라이브러리를 로드 -->
+        <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- React DOM 라이브러리를 로드 -->
+        <script type="text/babel"> 
+            const root = document.getElementById('root')
+            
+           
+            function App ()  {
+                const [counter, setCounter] = React.useState(0)
+                const onClick = () => {
+                    setCounter( counter + 1)
+                }
+                return(
+                <div>
+                    <h3>Total click : {counter}</h3>
+                    <button onClick={onClick}
+                    > 
+                    Click
+                    </button>
+                    
+                </div>
+                )
+            }
+
+           // React 요소 생성
+            ReactDOM.render(<App />, root); // React 요소를 DOM에 렌더링
+            // render()
+        </script>
+    </body>
+</html>
