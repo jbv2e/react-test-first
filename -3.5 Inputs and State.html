@@ -15,45 +15,26 @@
         <script type="text/babel">
             const root = document.getElementById('root')
 
-            // function Btn(props) {
-            function Btn({ banana, big }) {
-                console.log(big === true ? big : 'false')
-                function onClick() {
-                    console.log(banana)
-                }
-                return (
-                    <button
-                        onClick={onClick}
-                        style={{
-                            backgroundColor: 'tomato',
-                            color: 'white',
-                            padding: '10px 20px',
-                            border: 0,
-                            borderRadius: 10,
-                            fontSize: big ? 18 : 15
-                        }}>
-                        {banana}
-                    </button>
-                )
-            }
-            function SaveBtn() {
-                return (
-                    <button>Save</button>
-                )
-            }
-
-            function ConfirmBtn() {
-                return (
-                    <button>Confirm</button>
-                )
-            }
 
             function App() {
+                const [minutes, setMinutes] = React.useState()
+                const onChange = (e) => {
 
+                    console.log(`minutes : ${e.target.value.replace(/[^0-9]/g, "")}`)
+                    setMinutes(e.target.value)
+                    // setMinutes(e.target.value.replace(/[^0-9]/g, ""))
+                    // console.log(e.target.value)
+                }
                 return (
                     <div>
-                        <Btn banana='Save Change' big={true} />
-                        <Btn banana='Continue' />
+                        <h1>Converter </h1>
+                        <label htmlFor='minutes'>Minutes</label>
+                        <input id='minutes' value={minutes}
+                            onChange={onChange}
+                            placeholder="minutes" type="number" />
+                        <h4>{minutes}</h4>
+                        <label htmlFor='hours'>Hours</label>
+                        <input id='hours' placeholder="hours" type='number' />
                     </div>
                 )
             }

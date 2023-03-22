@@ -1,0 +1,90 @@
+<!DOCTYPE html> <!-- HTML5 문서 유형 선언 -->
+<html> <!-- HTML 문서 시작 -->
+    <head> <!-- 문서의 메타데이터를 포함하는 요소 -->
+        <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 설정 -->
+        <title>React CDN Sample</title> <!-- 문서의 제목을 설정 -->
+    </head>
+    <body> <!-- 문서의 본문을 포함하는 요소 -->
+        <div id="root"></div> <!-- React 컴포넌트를 렌더링할 DOM 요소 -->
+        <!-- <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script> 
+        <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script> -->
+        <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!-- React DOM 라이브러리를 로드 -->
+        <script type="text/babel">
+            const root = document.getElementById('root')
+
+            function MinutesToHours() {
+                const [amount, setAmount] = React.useState(0)
+                const [hours, setHours] = React.useState(0)
+                const [inverted, setInverted] = React.useState(false)
+                const onChange = (e) => {
+
+                    // console.log(`minutes : ${e.target.value.replace(/[^0-9]/g, "")}`)
+                    // setAmount(e.target.value)
+                    setAmount(e.target.value.replace(/[^0-9]/g, ""))
+                    // console.log(e.target.value)
+                }
+                const onReset = () => {
+                    setAmount(0)
+                }
+                const onFlip = () => {
+                    onReset()
+                    setInverted(cur => !cur)
+                }
+                return (
+                    <div>
+                        <h3>Minutes To Hours</h3>
+                        <label htmlFor='minutes'>Minutes</label>
+                        <input id='minutes' value={!inverted ? amount : Math.round(amount * 60)}
+                            onChange={onChange}
+                            placeholder="minutes" type="number" disabled={inverted} />
+                        <h4>input min : {amount}</h4>
+                        <label htmlFor='hours'>Hours</label>
+                        <input id='hours' placeholder="hours" value={inverted ? amount : Math.round(amount / 60)} onChange={onChange} type='number' disabled={!inverted} />
+                        <button onClick={onReset}>Reset</button>
+                        <button onClick={onFlip}>Flip</button>
+                    </div>
+                )
+            }
+
+            function KmToMiles() {
+                return (
+                    <div>
+                        <h3>Km To Miles</h3>
+                    </div>
+                )
+            }
+
+            function App() {
+                const [index, setIndex] = React.useState('0')
+                const onSelect = e => {
+                    // console.log(e.target.value)
+                    setIndex(e.target.value)
+                }
+                return (
+                    <div>
+                        <h1>Converter </h1>
+                        <select value={index} onChange={onSelect}>
+                            <option value='xx'> select unit </option>
+                            <option value='0'> minutes & hours </option>
+                            <option value='1'> km & mile </option>
+                        </select>
+                        {/*
+                        <MinutesToHours />
+                        <KmToMiles />
+                        */}
+                        {index === 'xx' ? 'Please Select your units' : null}
+                        {index === '0' ? <MinutesToHours /> : null}
+                        {index === '1' ? <KmToMiles /> : null}
+                    </div>
+                )
+            }
+
+            // React 요소 생성
+            ReactDOM.render(<App />, root); // React 요소를 DOM에 렌더링
+            // render()
+        </script>
+    </body>
+</html>
